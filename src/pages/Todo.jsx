@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddTodo from '../components/todoApp/addTodo'
 import DataTodo from '../components/todoApp/dataTodo'
 const Todo = () => {
-    const [dataTodo,setDataTodo]= useState([])
+    const dataTodos = JSON.parse(localStorage.getItem("dataTodo"))
+    const [dataTodo,setDataTodo]= useState(dataTodos);
+
+    useEffect(() => {
+        localStorage.setItem("dataTodo", JSON.stringify(dataTodo));
+    }, [dataTodo]);
     const addNewTodo = (name)=>{
         const newTodo = {
             id : randomIntFromInterval(1,20000),
