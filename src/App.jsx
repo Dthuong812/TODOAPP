@@ -5,9 +5,9 @@ function App() {
 
 
   return (
-    <>
+    <div style={{padding:"100px"}}>
        <Outlet/>
-    </>
+    </div>
   )
 }
 
