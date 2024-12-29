@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import { Button, Input } from 'antd'
+import { Button, Input, message } from 'antd'
 const AddTodo = (props) => {
     const {addNewTodo} = props
-    const [addTodo,setAddTodo]= useState()
+    const [addTodo,setAddTodo]= useState("")
     const handleOnChange=(name)=>{
         setAddTodo(name)
     }
     const handleClick=()=>{
-        addNewTodo(addTodo)
-        console.log("Add thành công",addTodo)
-        setAddTodo(" ")
+        if (addTodo.trim() === "") {
+            message.warning("Please enter a valid todo!");
+            return;
+        }
+        addNewTodo(addTodo.trim());
+        setAddTodo("");
     }
   return (
     <div style={{
@@ -21,6 +24,7 @@ const AddTodo = (props) => {
         width: "300px",
         }} 
         onChange={(event)=>handleOnChange(event.target.value)}
+        value={addTodo}
         />
     <Button type="primary" onClick={handleClick}>Add</Button>
     </div>
